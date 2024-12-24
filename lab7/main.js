@@ -1,6 +1,7 @@
 function toggleMenu() {
     document.getElementById("myDropdown").classList.toggle("show");
 }
+
 window.onclick = function(event) {
     if (!event.target.matches('.menuface')) {
         var dropdowns = document.getElementsByClassName("dropdown-content");
@@ -13,18 +14,15 @@ window.onclick = function(event) {
     }
 }
 
-
 let Playing = true;
+const music1 = document.getElementById('Lavender');
+const music2 = document.getElementById('FAITH');
+
 document.addEventListener('DOMContentLoaded', function() {
-    const music1 = document.getElementById('Lavender');
     music1.play();
 });
 
-
 document.getElementById('cross').addEventListener('click', function() {
-    const music1 = document.getElementById('Lavender');
-    const music2 = document.getElementById('FAITH');
-
     if (Playing) {
         music1.pause();
         music1.currentTime = 0;
@@ -34,30 +32,64 @@ document.getElementById('cross').addEventListener('click', function() {
         music2.currentTime = 0;
         music1.play();
     }
-    
-
     Playing = !Playing;
 });
 
-
 const video = document.getElementById('myVideo');
-const clickMeButton = document.getElementById('clickMe'); 
+const clickMeButton = document.getElementById('clickMe');
 
-
+let isVideoPlaying = false;
 
 function openFullscreen() {
   if (video.requestFullscreen) {
     video.requestFullscreen();
-  } else if (video.mozRequestFullScreen) { 
+  } else if (video.mozRequestFullScreen) {
     video.mozRequestFullScreen();
-  } else if (video.webkitRequestFullscreen) { 
+  } else if (video.webkitRequestFullscreen) {
     video.webkitRequestFullscreen();
-  } else if (video.msRequestFullscreen) { 
+  } else if (video.msRequestFullscreen) {
     video.msRequestFullscreen();
   }
-  video.style.display = 'block'; 
-  video.play(); 
+    
+  if (!isVideoPlaying) {
+        pauseMusic();
+        isVideoPlaying = true;
+    }
+
+  video.style.display = 'block';
+  video.play();
 }
+
+function pauseMusic() {
+    music1.pause();
+    music2.pause();
+}
+
+function playMusic() {
+    if (Playing) {
+        music1.play();
+    } else {
+        music2.play();
+    }
+}
+
+video.addEventListener('play', function() {
+   pauseMusic();
+});
+
+video.addEventListener('ended', function() {
+    isVideoPlaying = false;
+    video.style.display = 'none';
+    playMusic();
+});
+
+video.addEventListener('fullscreenchange', function() {
+    if (!document.fullscreenElement && !document.mozFullScreenElement &&
+        !document.webkitFullscreenElement && !document.msFullscreenElement) {
+       
+        isVideoPlaying = false;
+    }
+});
 
 clickMeButton.addEventListener('click', openFullscreen);
 
