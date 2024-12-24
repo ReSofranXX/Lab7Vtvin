@@ -96,7 +96,7 @@ clickMeButton.addEventListener('click', openFullscreen);
 document.addEventListener('DOMContentLoaded', () => {
     let currentImage = 0;
     const slider = document.querySelector('.slider');
-    const imagesInSlider = slider.querySelectorAll('img'); // Выбираем изображения
+    const imagesInSlider = slider.querySelectorAll('img'); 
     const caption = document.createElement('a');
     caption.classList.add('caption');
     slider.parentNode.insertBefore(caption, slider.nextSibling);
@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { text: "Man eating the soup XD", href: "soup.html" }
     ];
 
-    if (imagesInSlider.length > 0 && captions.length === imagesInSlider.length) { // Проверка
+    if (imagesInSlider.length > 0 && captions.length === imagesInSlider.length) { 
 
         function showImage(index) {
             imagesInSlider.forEach((img, i) => {
