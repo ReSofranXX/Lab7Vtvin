@@ -137,6 +137,6 @@ document.addEventListener('DOMContentLoaded', () => {
         showImage(currentImage);
 
     } else {
-        console.error("Ошибка: количество изображений и подписей не совпадает, или изображения не найдены!");
+        console.error("Ошибка!");
     }
 });
